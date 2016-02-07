@@ -131,7 +131,7 @@ class TelnetManager:
         Method for clear color fro input_buffer and special characters
         """
 
-        color_pattern = re.compile('\[([0-9]+;)*[0-9]+m|\[[0-9]+m|\[[A-Z]m*|\[[A-Z]{0,1}m|\b|\r|' + chr(27))            # 27 - ESC character
+        color_pattern = re.compile('\[([0-9]+;)*[0-9]+m|\[[0-9]+m|\[[A-Z]m*|\[[A-Z]{0,1}m|\b|' + chr(27))            # 27 - ESC character
 
         result_buffer = ''
         match_iter = color_pattern.finditer(input_buffer)
@@ -144,7 +144,7 @@ class TelnetManager:
 
         result_buffer += input_buffer[current_index:]
 
-        return result_buffer
+        return result_buffer.replace('\r\n','\n')
 
 telnet_manager = TelnetManager(username, password, host)
 
